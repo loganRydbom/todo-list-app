@@ -32,12 +32,24 @@ def save_tasks():
         theFile.write(task + "\n")
 
 # Load Tasks
+def loadTasks():
+    global tasks
+    user = os.getlogin()
+    try:
+        theFile = open(f"C:/Users/{user}/Documents/taskSave.txt", "x")
+    except FileExistsError:
+        theFile = open(f"C:/Users/{user}/Documents/taskSave.txt", "r")
+    
+    for line in theFile:
+        tasks.append(line.strip())
 # Demo flow (you can run this file directly: python todo.py)
 if __name__ == "__main__":
     add_task("Finish Cyber 201 assignment")
     add_task("Push code to GitHub")
-    #delete_task(1)
+    delete_task(1)
+    print(tasks)
     view_tasks()
-    mark_complete(1)
+    mark_complete(0)
     view_tasks()
     save_tasks()
+    loadTasks()
